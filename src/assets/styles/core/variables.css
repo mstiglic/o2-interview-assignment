@@ -7,14 +7,19 @@
 
     --core-red-100: #FFDCDC;
     --core-red-600: #DC2828;
-    
+
     --core-yellow-100: #FAF1B6;
     --core-yellow-700: #A56315;
-    
+
+    --core-green-100: #ddffdc;
+    --core-green-600: #12c730;
+
     --core-o2-blue-500: #0050FF;
 
-    --core-alpha-dim-50: #1a1a1a0f; /*6%*/
-    --core-alpha-dim-800: #1A1A1ACC; /*80%*/
+    --core-alpha-dim-50: #1a1a1a0f;
+    /*6%*/
+    --core-alpha-dim-800: #1A1A1ACC;
+    /*80%*/
 
     /* Colors - Sematic */
     --color-surface--x-high: var(--core-gray-500);
@@ -24,15 +29,20 @@
     --color-surface--danger__variant: var(--core-red-100);
     --color-surface--warning: var(--core-yellow-700);
     --color-surface--warning__variant: var(--core-yellow-100);
+    --color-surface--success: var(--core-green-600);
+    --color-surface--success__variant: var(--core-green-100);
     --color-content--on-neutral__xx-high: var(--core-gray-950);
     --color-content--on-neutral__medium: var(--core-gray-500);
     --color-content--on-neutral__low: var(--core-gray-300);
     --color-content--on-neutral__danger: var(--core-red-600);
     --color-content--on-neutral__warning: var(--core-yellow-700);
+    --color-content--on-neutral__success: var(--core-green-600);
     --color-state--default__hover: var(--core-alpha-dim-50);
     --color-state--default__focus: var(--core-alpha-dim-800);
+    --color-surface-state--default__disabled: var(--core-alpha-dim-50);
+    --color-state--default__disabled: var(--core-gray-500);
 
-    /* Dimensions */    
+    /* Dimensions */
     --dimension-spacing--xs: 8px;
     --dimension-spacing--s: 12px;
     --dimension-spacing--m: 16px;
@@ -41,7 +51,8 @@
     --dimension-radius--input: 12px;
 
     /* Typography */
-    --font-font-family: 'Roboto', sans-serif; /*, Replacement for O2 On Air*/
+    --font-font-family: Helvetica, sans-serif;
+    /*, Replacement for O2 On Air*/
 
     --font-label-s-size: 14px;
     --font-label-s-weight: 550;
@@ -57,4 +68,9 @@
     --font-body-m-weight: 400;
     --font-body-m-line-height: 22px;
     --font-body-m-letter-spc: 0.01px;
+
+    --font-body-s-size: 14px;
+    --font-body-s-weight: 300;
+    --font-body-s-line-height: 17px;
+    --font-body-s-letter-spc: 0.16px;
 }
