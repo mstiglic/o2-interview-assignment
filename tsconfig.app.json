@@ -28,6 +28,8 @@
      "@stories/*": ["src/stories/*"],
      "@assets/*": ["src/assets/*"],
      "@styles/*": ["src/assets/styles/*"],
+     "@constants/*": ["src/constants/*"],
+     "@helpers/*": ["src/helpers/*"],
     }
   },
   "include": ["src"]
