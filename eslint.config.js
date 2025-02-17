@@ -25,10 +25,14 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'react-hooks/exhaustive-deps': 0,
       'indent': [2, 4, { "SwitchCase": 1 }],
+      "semi": [2, "always"],
+      "comma-spacing": [2, { "before": false, "after": true }],
       '@typescript-eslint/consistent-type-imports': 2,
-      "linebreak-style": ["error", "unix"],
-      "quotes": ["error", "single"],
+      '@typescript-eslint/no-explicit-any': 1,
+      "linebreak-style": [2, "unix"],
+      "quotes": [2, "single"],
       'max-len': [
         2,
         {
