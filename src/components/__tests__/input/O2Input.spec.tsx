@@ -183,14 +183,12 @@ describe('O2Input Component', () => {
 
     it('renders with slots', () => {
         render(
-            <O2Input>
-                {{
-                    slotOutsideLeft: <span>Left Slot</span>,
-                    slotOutsideRight: <span>Right Slot</span>,
-                    slotInsideLeft: <span>Inside Left Slot</span>,
-                    slotInsideRight: <span>Inside Right Slot</span>,
-                }}
-            </O2Input>
+            <O2Input slot={{
+                outsideLeft: 'Left Slot',
+                outsideRight: 'Right Slot',
+                insideLeft: 'Inside Left Slot',
+                insideRight: 'Inside Right Slot',
+            }}/>
         );
         expect(screen.getByText('Left Slot')).toBeInTheDocument();
         expect(screen.getByText('Right Slot')).toBeInTheDocument();
