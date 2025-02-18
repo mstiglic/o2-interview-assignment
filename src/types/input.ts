@@ -1,7 +1,6 @@
 import type { INPUT_SIZE, INPUT_STATE, INPUT_TYPE } from '@constants/input';
 import type { AriaRole, HTMLInputAutoCompleteAttribute } from 'react';
 
-
 export interface IInputProps {
     onChange?: (stringValue: string, event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     onChangeDebounce?: (value?: string) => void;
@@ -28,11 +27,11 @@ export interface IInputProps {
         above?: string;
         below?: string;
     }
-    children?: {
-        slotInsideLeft?: React.ReactNode;
-        slotInsideRight?: React.ReactNode;
-        slotOutsideLeft?: React.ReactNode;
-        slotOutsideRight?: React.ReactNode;
+    slot?: {
+        insideLeft?: React.ReactNode;
+        insideRight?: React.ReactNode;
+        outsideLeft?: React.ReactNode;
+        outsideRight?: React.ReactNode;
     }
     hidden?: boolean;
     className?: string;
@@ -48,7 +47,7 @@ export interface IInputProps {
     dir?: string;
     autoFocus?: boolean;
     autoCorrect?: string;
-    row?: number;
+    rows?: number;
     cols?: number;
     'aria-labelledby'?: string;
     'aria-describedby'?: string;

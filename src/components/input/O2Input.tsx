@@ -19,7 +19,9 @@ function O2Input(props: IInputProps): ReactNode {
         }
     }, 300), []);
 
-    const hasError: boolean = isInvalid || !!props.errors?.length || props.state === INPUT_STATE.ERROR;
+    const localErrorMessages = props.errors?.filter(error => error);
+    const hasError: boolean = isInvalid || !!localErrorMessages?.length || props.state === INPUT_STATE.ERROR;
+    
     const isResizable: boolean = !!props.resizable && props.type === INPUT_TYPE.TEXTAREA;
     const rootClassNames = classNames(
         DEFAULT_CLASS,
@@ -30,7 +32,7 @@ function O2Input(props: IInputProps): ReactNode {
             [getBemClassName(DEFAULT_CLASS, null, 'is-success')]: props.state === INPUT_STATE.SUCCESS,
             [getBemClassName(DEFAULT_CLASS, null, 'has-warning')]: props.state === INPUT_STATE.WARNING,
             [getBemClassName(DEFAULT_CLASS, null, 'is-focused')]: isFocused,
-            [getBemClassName(DEFAULT_CLASS, null, 'textarea')]: props.type === INPUT_TYPE.TEXTAREA,
+            [getBemClassName(DEFAULT_CLASS, null, props.type)]: props.type,
             [getBemClassName(DEFAULT_CLASS, null, 'has-description-above')]: props.description?.above,
             [getBemClassName(DEFAULT_CLASS, null, 'has-description-below')]: props.description?.below,
             [getBemClassName(DEFAULT_CLASS, null, 'is-resizable')]: isResizable,
@@ -134,7 +136,7 @@ function O2Input(props: IInputProps): ReactNode {
         spellCheck: props.spellCheck,
         dir: props.dir,
         'aria-required': props.required,
-        'aria-invalid': isInvalid || !!props.errors?.length,
+        'aria-invalid': isInvalid || !!localErrorMessages?.length,
         'aria-readonly': props.readonly,
         'aria-disabled': props.disabled,
         'aria-labelledby': props['aria-labelledby'],
@@ -149,6 +151,8 @@ function O2Input(props: IInputProps): ReactNode {
     };
     const textareaAttributes: React.TextareaHTMLAttributes<HTMLTextAreaElement> = {
         'aria-label': props['aria-label'] || 'Textarea field',
+        rows: props.rows,
+        cols: props.cols,
         onInput: handleInputTextarea,
         ...(commonAttributes as React.TextareaHTMLAttributes<HTMLTextAreaElement>),
     };
@@ -166,32 +170,34 @@ function O2Input(props: IInputProps): ReactNode {
 
     return (
         <div className={rootClassNames} hidden={props.hidden} data-testid='o2-input-wrapper'>
-            <div className={getBemClassName(DEFAULT_CLASS, 'label')}>
-                <Show when={props.label}>
+            <Show when={props.label}>
+                <div className={getBemClassName(DEFAULT_CLASS, 'label')}>
                     <label 
                         htmlFor={props.id}  
                         className={getBemClassName(DEFAULT_CLASS, 'label-text')}
                     >
                         {props.label}
                     </label>
-                </Show>
-                <Show when={!props.required}>
-                    <span className={getBemClassName(DEFAULT_CLASS, 'optional')}>Optional</span>
-                </Show>
-            </div>
+                    <Show when={!props.required}>
+                        <span className={getBemClassName(DEFAULT_CLASS, 'optional')}>Optional</span>
+                    </Show>
+                </div>
+            </Show>
             <Show when={props.description?.above}>
                 <div className={descriptionClassName.above}>
                     {props.description?.above}
                 </div>
             </Show>
             <div className={getBemClassName(DEFAULT_CLASS, 'input')} >
-                <Show when={props.children?.slotOutsideLeft}>
-                    <div className={slotClassName.left}>{props.children?.slotOutsideLeft}</div>
+                <Show when={props.slot?.outsideLeft}>
+                    <div className={slotClassName.left}>
+                        {props.slot?.outsideLeft}
+                    </div>
                 </Show>
                 <div className={getBemClassName(DEFAULT_CLASS, 'input-wrapper')}>
-                    <Show when={props.children?.slotInsideLeft}>
+                    <Show when={props.slot?.insideLeft}>
                         <div className={slotClassName.insideLeft}>
-                            {props.children?.slotInsideLeft}
+                            {props.slot?.insideLeft}
                         </div>
                     </Show>
                     <Show 
@@ -200,21 +206,21 @@ function O2Input(props: IInputProps): ReactNode {
                     >
                         <textarea {...textareaAttributes} {...controlModeAttributes} />
                     </Show>
-                    <Show when={props.children?.slotInsideRight}>
+                    <Show when={props.slot?.insideRight}>
                         <div className={slotClassName.insideRight}>
-                            {props.children?.slotInsideRight}
+                            {props.slot?.insideRight}
                         </div>
                     </Show>
                 </div>
-                <Show when={props.children?.slotOutsideRight}>
+                <Show when={props.slot?.outsideRight}>
                     <div className={slotClassName.right}>
-                        {props.children?.slotOutsideRight}
+                        {props.slot?.outsideRight}
                     </div>
                 </Show>
             </div>
-            <Show when={props.errors?.length}>
+            <Show when={localErrorMessages?.length}>
                 <div className={getBemClassName(DEFAULT_CLASS, 'errors')}>
-                    {props.errors?.map((error, index) => (
+                    {localErrorMessages?.map((error, index) => (
                         <span 
                             key={`o2-input-error__${index}`} 
                             className={getBemClassName(DEFAULT_CLASS, 'error-message')}
