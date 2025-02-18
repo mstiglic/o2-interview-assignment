@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
 function App(): ReactNode { 
-    return <div>Hello world</div>
+    return <div>Hello world</div>;
 }
 
-export default App
+export default App;
